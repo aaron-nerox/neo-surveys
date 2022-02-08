@@ -2,19 +2,25 @@ const express = require('express');
 const router = express.Router();
 const {readDB, appendDB} = require('../controllers/dataBaseController');
 const {validateSurvey, validateAnswer} = require('../middleware/InputValidation');
-const {getSurveyResult} = require('../controllers/surveyResultController');
+const {stripSurveyAnswers, getSurveyResult} = require('../controllers/surveyController');
 
 /**
- * get the list of stored surveys
+ * get the list of stored surveys without the answers
  */
 router.get('/', async (req, res)=>{
     const surveyList = await readDB("KEY_SURVEY");
-    res.send(surveyList);
+    let strippedSurveyList = []
+
+    surveyList.forEach(survey => {
+        strippedSurveyList.push(stripSurveyAnswers(survey));
+    });
+
+    res.send(strippedSurveyList);
 });
 
 
 /**
- * get a survey by its id
+ * get a survey by its id without answers
  */
 router.get('/:id', async (req, res)=>{
     const idSurvey = parseInt(req.params.id);
@@ -23,7 +29,8 @@ router.get('/:id', async (req, res)=>{
 
     if(!survey) return res.status(404).send("A survey with such id does not exist");
 
-    res.send(survey);
+    let strippedSurvey = stripSurveyAnswers(survey)
+    res.send(strippedSurvey);
 });
 
 
@@ -64,7 +71,7 @@ router.post('/create', async (req, res)=>{
     const {error, value} = validateSurvey(req.body);
     if(error) return res.status(400).send(error.details[0].message);
     
-    let newSurvey = await appendDB("KEY_SURVEY",req.body);
+    let newSurvey = await appendDB("KEY_SURVEY",value);
     res.send(newSurvey);
 });
 
