@@ -16,7 +16,7 @@ module.exports.validateSurvey = (input)=>{
 module.exports.validateAnswer = (input)=>{
 
     const schema = Joi.object({
-        idSurvey: Joi.number.required(),
+        idSurvey: Joi.number().required(),
         answers: Joi.array().items(Joi.object({
             statement: Joi.string().required(),
             answer: Joi.boolean().required()

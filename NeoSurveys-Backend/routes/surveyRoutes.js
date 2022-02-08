@@ -42,7 +42,10 @@ router.post('/:id/result', async (req, res)=>{
     const {error, value} = validateAnswer(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
-    let newRespone = await appendDB("KEY_RESPONSE", req.body);
+    if(idSurvey != value.idSurvey) return res.status(400)
+                        .send("Your answer does not seem to have an existing valid survey");
+
+    let newRespone = await appendDB("KEY_SURVEY_ANSWER", value);
 
     //compare the answers with the real survey.
     let result = getSurveyResult(survey,newRespone);
