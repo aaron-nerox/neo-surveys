@@ -24,15 +24,32 @@ module.exports.checkDB = ()=>{
  * appendDB: a function that appends new data to the surveys json database
  * @param {json} data new json object to add to the database 
  */
-module.exports.appendDB = (data)=>{
-    fs.readFile(surveysData, (err, fsData)=>{
-        if(!err) {
-            let dbData = JSON.parse(fsData);
-            dbData.push(data);
-            strData = JSON.stringify(dbData);
-            fs.writeFile(surveysData, strData, (err, result)=>{});
-        }
-    });
+module.exports.appendDB = async (data)=>{
+    try{
+        let fsData = await mz.readFile(surveysData);
+        let dbData = JSON.parse(fsData);
+        data.id = dbData.length + 1;
+
+        dbData.push(data);
+        strData = JSON.stringify(dbData);
+
+        fs.writeFile(surveysData, strData, (err, result)=>{});
+        return data;
+    }catch(err){
+        console.log(err);
+    }
+
+    // fs.readFile(surveysData, (err, fsData)=>{
+    //     if(!err) {
+    //         let dbData = JSON.parse(fsData);
+    //         data.id = dbData.length + 1;
+
+    //         dbData.push(data);
+    //         strData = JSON.stringify(dbData);
+
+    //         fs.writeFile(surveysData, strData, (err, result)=>{});
+    //     }
+    // });
 }
 
 
