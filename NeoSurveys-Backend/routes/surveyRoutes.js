@@ -37,12 +37,12 @@ router.post('/:id/result', (req, res)=>{
  * create a survey
  * @param: req contains the survey object to store
  */
-router.post('/create', (req, res)=>{
+router.post('/create', async (req, res)=>{
     const {error, value} = validateSurvey(req.body);
     if(error) return res.status(400).send(error.details[0].message);
     
-    // appendDB(req.body);
-    res.send(req.body);
+    let newSurvey = await appendDB(req.body);
+    res.send(newSurvey);
 });
 
 module.exports = router;
