@@ -9,13 +9,7 @@ const {stripSurveyAnswers, getSurveyResult} = require('../controllers/surveyCont
  */
 router.get('/', async (req, res)=>{
     const surveyList = await readDB("KEY_SURVEY");
-    let strippedSurveyList = []
-
-    surveyList.forEach(survey => {
-        strippedSurveyList.push(stripSurveyAnswers(survey));
-    });
-
-    res.send(strippedSurveyList);
+    res.send(surveyList);
 });
 
 
@@ -29,8 +23,7 @@ router.get('/:id', async (req, res)=>{
 
     if(!survey) return res.status(404).send("A survey with such id does not exist");
 
-    let strippedSurvey = stripSurveyAnswers(survey)
-    res.send(strippedSurvey);
+    res.send(survey);
 });
 
 
@@ -52,15 +45,10 @@ router.post('/:id/result', async (req, res)=>{
     if(idSurvey != value.idSurvey) return res.status(400)
                         .send("Your answer does not seem to have an existing valid survey");
 
-    let newRespone = await appendDB("KEY_SURVEY_ANSWER", value);
+    appendDB("KEY_SURVEY_ANSWER", value);
 
-    //compare the answers with the real survey.
-    let result = getSurveyResult(survey,newRespone);
-
-    //store the answer in the database
-    let indexedResult = await appendDB("KEY_RESULT", result);
-
-    res.send(indexedResult);
+    let surveyResponses = await readDB("KEY_SURVEY_ANSWER");
+    res.send(surveyResponses);
 });
 
 /**

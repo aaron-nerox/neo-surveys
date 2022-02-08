@@ -12,11 +12,6 @@ const surveysData = "./data/surveys.json";
 const answersData = "./data/surveyAnswers.json"
 
 /**
- * @constant: json file to store survey results
- */
-const resultData = "./data/surveyResults.json"
-
-/**
  * a function to check if the files exist
  * depending on file existence w can append an empty array or just leave the file
  */
@@ -32,13 +27,6 @@ module.exports.checkDB = ()=>{
     fs.access(answersData, (err)=>{
         if(err) {
             fs.appendFile(answersData, JSON.stringify(emptyArr)
-                , (fileError, result)=>{});
-        }
-    });
-
-    fs.access(resultData, (err)=>{
-        if(err) {
-            fs.appendFile(resultData, JSON.stringify(emptyArr)
                 , (fileError, result)=>{});
         }
     });
@@ -92,9 +80,7 @@ module.exports.readDB = async (key) =>{
 const getPath = (key)=>{
     if(key === "KEY_SURVEY"){
         return surveysData;
-    }else if(key === "KEY_SURVEY_ANSWER"){
-        return answersData;
     }else{
-        return resultData;
+        return answersData;
     }
 }
