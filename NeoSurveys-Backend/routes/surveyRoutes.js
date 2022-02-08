@@ -8,7 +8,7 @@ const {getSurveyResult} = require('../controllers/surveyResultController');
  * get the list of stored surveys
  */
 router.get('/', async (req, res)=>{
-    const surveyList = await readDB();
+    const surveyList = await readDB("KEY_SURVEY");
     res.send(surveyList);
 });
 
@@ -18,7 +18,7 @@ router.get('/', async (req, res)=>{
  */
 router.get('/:id', async (req, res)=>{
     const idSurvey = parseInt(req.params.id);
-    const surveyList = await readDB();
+    const surveyList = await readDB("KEY_SURVEY");
     const survey = surveyList.find(survey => survey.id === idSurvey);
 
     if(!survey) return res.status(404).send("A survey with such id does not exist");
@@ -26,16 +26,18 @@ router.get('/:id', async (req, res)=>{
     res.send(survey);
 });
 
+
 /**
  * get the result of a survey
  * @param: req contains the response of the user on a survey
  */
 router.post('/:id/result', async (req, res)=>{
     const idSurvey = parseInt(req.params.id);
-    const surveyList = await readDB();
+    const surveyList = await readDB("KEY_SURVEY");
     const survey = surveyList.find(survey => survey.id === idSurvey);
 
-    if(!survey) return res.status(404).send("Your answer does not seem to have an existing valid survey");
+    if(!survey) return res.status(404)
+                        .send("Your answer does not seem to have an existing valid survey");
 
     const {error, value} = validateAnswer(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -45,7 +47,10 @@ router.post('/:id/result', async (req, res)=>{
     //compare the answers with the real survey.
     let result = getSurveyResult(survey,newRespone);
 
-    res.send(result);
+    //store the answer in the database
+    let indexedResult = await appendDB("KEY_RESULT", result);
+
+    res.send(indexedResult);
 });
 
 /**
