@@ -11,6 +11,10 @@ const surveysData = "./data/surveys.json";
  */
 const answersData = "./data/surveyAnswers.json"
 
+/**
+ * @constant: json file to store survey results
+ */
+const resultData = "./data/surveyResults.json"
 
 /**
  * a function to check if the files exist
@@ -24,9 +28,17 @@ module.exports.checkDB = ()=>{
                 , (fileError, result)=>{});
         }
     });
+
     fs.access(answersData, (err)=>{
         if(err) {
             fs.appendFile(answersData, JSON.stringify(emptyArr)
+                , (fileError, result)=>{});
+        }
+    });
+
+    fs.access(resultData, (err)=>{
+        if(err) {
+            fs.appendFile(resultData, JSON.stringify(emptyArr)
                 , (fileError, result)=>{});
         }
     });
@@ -38,12 +50,7 @@ module.exports.checkDB = ()=>{
  * @param {string} key an indicator of which table to append to in the database.
  */
 module.exports.appendDB = async (key, data)=>{
-    let path;
-    if(key === "KEY_SURVEY"){
-        path = surveysData;
-    }else{
-        path = answersData;
-    }
+    let path = getPath(key)
 
     try{
         let fsData = await mz.readFile(path);
@@ -62,14 +69,32 @@ module.exports.appendDB = async (key, data)=>{
 
 
 /**
- * 
+ * @param {string} key an indicator of which table to append to in the database.
  * @returns the whole surveys json file data
  */
-module.exports.readDB = async () =>{
+module.exports.readDB = async (key) =>{
+    let path = getPath(key);
+
     try{
-        let data = await mz.readFile(surveysData);
+        let data = await mz.readFile(path);
         return JSON.parse(data);
     }catch(err){
         console.log(err);
+    }
+}
+
+
+/**
+ * 
+ * @param {String} key an indicator of which table to append to in the database.
+ * @returns a string of the path that corresponds to the key
+ */
+const getPath = (key)=>{
+    if(key === "KEY_SURVEY"){
+        return surveysData;
+    }else if(key === "KEY_SURVEY_ANSWER"){
+        return answersData;
+    }else{
+        return resultData;
     }
 }
