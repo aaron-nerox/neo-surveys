@@ -7,6 +7,12 @@ const mz = require('mz/fs');
 const surveysData = "./data/surveys.json";
 
 /**
+ * @constant: json file to store survey answers
+ */
+const answersData = "./data/surveyAnswers.json"
+
+
+/**
  * a function to check if the files exist
  * depending on file existence w can append an empty array or just leave the file
  */
@@ -18,38 +24,40 @@ module.exports.checkDB = ()=>{
                 , (fileError, result)=>{});
         }
     });
+    fs.access(answersData, (err)=>{
+        if(err) {
+            fs.appendFile(answersData, JSON.stringify(emptyArr)
+                , (fileError, result)=>{});
+        }
+    });
 }
 
 /**
  * appendDB: a function that appends new data to the surveys json database
  * @param {json} data new json object to add to the database 
+ * @param {string} key an indicator of which table to append to in the database.
  */
-module.exports.appendDB = async (data)=>{
+module.exports.appendDB = async (key, data)=>{
+    let path;
+    if(key === "KEY_SURVEY"){
+        path = surveysData;
+    }else{
+        path = answersData;
+    }
+
     try{
-        let fsData = await mz.readFile(surveysData);
+        let fsData = await mz.readFile(path);
         let dbData = JSON.parse(fsData);
         data.id = dbData.length + 1;
 
         dbData.push(data);
         strData = JSON.stringify(dbData);
 
-        fs.writeFile(surveysData, strData, (err, result)=>{});
+        fs.writeFile(path, strData, (err, result)=>{});
         return data;
     }catch(err){
         console.log(err);
     }
-
-    // fs.readFile(surveysData, (err, fsData)=>{
-    //     if(!err) {
-    //         let dbData = JSON.parse(fsData);
-    //         data.id = dbData.length + 1;
-
-    //         dbData.push(data);
-    //         strData = JSON.stringify(dbData);
-
-    //         fs.writeFile(surveysData, strData, (err, result)=>{});
-    //     }
-    // });
 }
 
 
