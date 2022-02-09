@@ -31,7 +31,7 @@ router.get('/:id', async (req, res)=>{
  * get the result of a survey
  * @param: req contains the response of the user on a survey
  */
-router.post('/:id/result', async (req, res)=>{
+router.post('/result/:id', async (req, res)=>{
     const idSurvey = parseInt(req.params.id);
     const surveyList = await readDB("KEY_SURVEY");
     const survey = surveyList.find(survey => survey.id === idSurvey);

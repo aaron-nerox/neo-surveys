@@ -1,6 +1,13 @@
+import React, {useEffect} from 'react';
 import SurveyCard from "../components/SurveyCard";
 
 const SurveyList = ()=>{
+
+    useEffect(()=>{
+
+    },[]);
+
+    
     return (
         <div className="min-h-screen grid content-center justify-items-center">
             <p className="m-4 mt-6 text-2xl font-bold">Browse surveys and take some of them</p>
