@@ -6,7 +6,9 @@ module.exports = {
     colors: {
       'baby-blue': '#00B3FF',
       'azure': '#00FFB8',
-      'white': '#FEFEFE'
+      'white': '#FEFEFE',
+      'sky-50' : '#f0f9ff',
+      'azure-100': '#ccfbf1'
     },
     extend: {},
   },

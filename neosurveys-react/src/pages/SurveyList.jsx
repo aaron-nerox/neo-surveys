@@ -1,7 +1,14 @@
+import SurveyCard from "../components/SurveyCard";
 
 const SurveyList = ()=>{
     return (
-        <h1>This is the survey list page</h1>
+        <div className="w-4/5 mx-auto grid grid-cols-2">
+            <SurveyCard name="this"/>
+            <SurveyCard name="test"/>
+            <SurveyCard name="test"/>
+            <SurveyCard name="test"/>
+            <SurveyCard name="test"/>
+        </div>
     );
 }
 
