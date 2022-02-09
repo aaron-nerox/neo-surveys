@@ -8,7 +8,7 @@ const SurveyList = ()=>{
     let navigate = useNavigate();
 
     useEffect(()=>{
-        Get(services.LIST_SURVEYS, {})
+        Get(services.LIST_SURVEYS)
         .then((result)=>{
             setSurveyList(result.data);
         });

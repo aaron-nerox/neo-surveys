@@ -7,10 +7,15 @@ export const services = {
     RESULT_SURVEY: `${ROOT_URL}/result`,
 }
 
-export const Get = (service, params) => {
-    return axios.get(service, {
-        params: params
-    });
+export const Get = (service, param) => {
+    let url;
+
+    if(param) 
+        url = `${service}/${param}`
+    else
+        url = `${service}`
+    
+    return axios.get(url);
 }
 
 export const Post = (service, data)=>{
