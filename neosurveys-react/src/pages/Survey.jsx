@@ -6,12 +6,17 @@ import QuestionCard from "../components/QuestionCard";
 const Survey = ()=>{
     let urlParams = useParams();
     const [survey, setSurvey] = useState({});
-    
+    const [surveyAnswer,setSurveyAnswer] = useState({});
+
     useEffect(()=>{
         Get(services.LIST_SURVEYS, urlParams.idSurvey)
         .then((result)=>{
             setSurvey(result.data);
-            console.log(result.data);
+            let initAnswer = {
+                "idSurvey": result.data.id,
+                "answers": result.data.questions
+            }
+            setSurveyAnswer(initAnswer);
         });
     },[urlParams.idSurvey]);
 
@@ -23,10 +28,15 @@ const Survey = ()=>{
             <p className="m-2 text-xl font-bold">
                 {survey?.name}
             </p>
+
             <div className="my-4 mb-6 w-full mx-auto text-center">
                 {
                     survey?.questions?.map( (question, index) => (
                         <QuestionCard 
+                            onClick={(answer)=>{
+                                surveyAnswer.answers[index].answer = answer;
+                                console.log(surveyAnswer);
+                            }}
                             statement={question.statement} 
                             key={index}
                         />
