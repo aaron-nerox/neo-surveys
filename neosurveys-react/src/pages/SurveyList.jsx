@@ -1,9 +1,11 @@
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import SurveyCard from "../components/SurveyCard";
 import {services, Get} from "../services/crud.services";
 
 const SurveyList = ()=>{
     const [surveyList, setSurveyList] = useState([]);
+    let navigate = useNavigate();
 
     useEffect(()=>{
         Get(services.LIST_SURVEYS, {})
@@ -24,7 +26,10 @@ const SurveyList = ()=>{
                         <SurveyCard 
                             name={survey.name} 
                             key={survey.id} 
-                            onClick={()=>{}}
+                            onClick={()=>{
+                                navigate(`/survey/${survey.id}`)
+                                }   
+                            }
                         />
                     ))
                 }
