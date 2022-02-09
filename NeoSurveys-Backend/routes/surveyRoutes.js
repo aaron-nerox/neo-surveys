@@ -45,10 +45,13 @@ router.post('/result/:id', async (req, res)=>{
     if(idSurvey != value.idSurvey) return res.status(400)
                         .send("Your answer does not seem to have an existing valid survey");
 
-    appendDB("KEY_SURVEY_ANSWER", value);
+    let data = await appendDB("KEY_SURVEY_ANSWER", value);
 
     let surveyResponses = await readDB("KEY_SURVEY_ANSWER");
-    res.send(surveyResponses);
+    let result = surveyResponses?.filter(surveyResponse => 
+        surveyResponse.idSurvey === idSurvey);
+
+    res.send(result);
 });
 
 /**
