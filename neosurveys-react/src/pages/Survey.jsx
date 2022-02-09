@@ -38,7 +38,7 @@ const Survey = ()=>{
 
         Post(services.RESULT_SURVEY, surveyAnswer, surveyAnswer.idSurvey)
         .then((result)=>{
-            console.log(result.data);
+            //todo: add a modal for the result
         });
     }
 

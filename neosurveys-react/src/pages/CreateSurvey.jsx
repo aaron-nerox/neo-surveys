@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {services, Post} from "../services/crud.services";
 import logo from "../assets/icons/main_logo.png"
 import StatementInput from "../components/StatementInput";
 
@@ -16,6 +17,20 @@ const CreateSurvey = ()=>{
         surveyQuestions[index].statement = newQuestion
         setSurveyQuestions(surveyQuestions);
         console.log(surveyQuestions);
+    }
+
+    function createSurvey(){
+        let data = {
+            "name": surveyTitle,
+            "questions": surveyQuestions
+        }
+
+        Post(services.CREATE_SURVEY, data)
+        .then(result => {
+            //todo: add a modal saying this is cool
+            setSurveyTitle("");
+            setSurveyQuestions([]);
+        })
     }
 
     return (
@@ -74,6 +89,15 @@ const CreateSurvey = ()=>{
                 <img src={logo} alt="add" className="max-w-[10%]"/>
 
             </div>
+
+            <button
+                onClick={createSurvey}
+
+                className="bg-baby-blue px-10 py-4 rounded-2xl m-5 mb-10
+                hover:bg-azure transition-all font-bold text-xl text-white 
+                shadow-lg shadow-baby-blue/50 hover:shadow-azure/40">
+                Create survey
+            </button>
         </div>
     );
 }
