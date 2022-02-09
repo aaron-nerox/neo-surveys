@@ -9,6 +9,7 @@
   "author": "Aaron (Haroune)",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.2",
     "helmet": "^5.0.2",
     "joi": "^17.6.0",

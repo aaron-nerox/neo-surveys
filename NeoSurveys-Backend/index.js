@@ -2,6 +2,7 @@ const Joi = require('joi');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const cors = require('cors');
 const {checkDB} = require('./controllers/dataBaseController')
 
 const app = express();
@@ -13,6 +14,7 @@ const surveyRoutes = require('./routes/surveyRoutes');
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
+app.use(cors());
 
 app.use('/', homeRoute);
 app.use('/api/surveys', surveyRoutes);
