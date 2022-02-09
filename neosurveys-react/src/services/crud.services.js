@@ -18,6 +18,13 @@ export const Get = (service, param) => {
     return axios.get(url);
 }
 
-export const Post = (service, data)=>{
-    return axios.post(service, data);
+export const Post = (service, data, param)=>{
+    let url;
+
+    if(param) 
+        url = `${service}/${param}`
+    else
+        url = `${service}`
+
+    return axios.post(url, data);
 }

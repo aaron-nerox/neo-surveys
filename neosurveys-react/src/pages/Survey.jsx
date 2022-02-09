@@ -7,6 +7,7 @@ const Survey = ()=>{
     let urlParams = useParams();
     const [survey, setSurvey] = useState({});
     const [surveyAnswer,setSurveyAnswer] = useState({});
+    const [isResultAvailable, setIsResultAvailable] = useState(false);
 
     useEffect(()=>{
         Get(services.LIST_SURVEYS, urlParams.idSurvey)
@@ -19,6 +20,27 @@ const Survey = ()=>{
             setSurveyAnswer(initAnswer);
         });
     },[urlParams.idSurvey]);
+
+    function checkResultAvailable(){
+        let isAllResults = true;
+        surveyAnswer.answers.forEach(answer => {
+            if(Object.keys(answer).length !== 2){
+                isAllResults = false;
+            }
+        });
+
+        if(isAllResults !== isResultAvailable){
+            setIsResultAvailable(isAllResults);
+        }
+    }
+
+    function createResult(){
+
+        Post(services.RESULT_SURVEY, surveyAnswer, surveyAnswer.idSurvey)
+        .then((result)=>{
+            console.log(result.data);
+        });
+    }
 
     return (
         <div className="min-h-screen grid content-center justify-items-center">
@@ -35,7 +57,7 @@ const Survey = ()=>{
                         <QuestionCard 
                             onClick={(answer)=>{
                                 surveyAnswer.answers[index].answer = answer;
-                                console.log(surveyAnswer);
+                                checkResultAvailable();
                             }}
                             statement={question.statement} 
                             key={index}
@@ -43,6 +65,16 @@ const Survey = ()=>{
                     ))
                 }
             </div>
+
+            <button
+                onClick={createResult}
+
+                className={`bg-baby-blue px-10 py-4 rounded-2xl m-5 mb-10
+                hover:bg-azure transition-all font-bold text-xl text-white 
+                shadow-lg shadow-baby-blue/50 hover:shadow-azure/40
+                ${isResultAvailable? "" : "hidden"}`}>
+                See results
+            </button>
         </div>
     );
 }

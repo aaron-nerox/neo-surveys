@@ -20,14 +20,14 @@ const Home = ()=>{
 
             <div className='inline-flex flex-row items-center'>
                 <Link 
-                    className="bg-baby-blue px-10 py-4 rounded-3xl m-5
+                    className="bg-baby-blue px-10 py-4 rounded-2xl m-5
                         hover:bg-azure transition-all font-bold text-xl text-white 
                         shadow-lg shadow-baby-blue/50 hover:shadow-azure/40" 
                     to="/surveys">
                     Browse surveys
                 </Link>
                 <Link 
-                    className="bg-baby-blue px-10 py-4 rounded-3xl m-5
+                    className="bg-baby-blue px-10 py-4 rounded-2xl m-5
                         hover:bg-azure transition-all font-bold text-xl text-white 
                         shadow-lg shadow-baby-blue/50 hover:shadow-azure/40"
                     to="/newsurvey">
