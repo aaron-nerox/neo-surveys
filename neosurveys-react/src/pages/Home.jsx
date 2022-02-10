@@ -2,6 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import AppLogo from '../assets/icons/main_logo.png';
 
+/**
+ * The home page
+ * @returns 
+ */
 const Home = ()=>{
     return (
         <div className="w-full h-screen bg-slate-100 grid 
@@ -26,6 +30,7 @@ const Home = ()=>{
                     to="/surveys">
                     Browse surveys
                 </Link>
+
                 <Link 
                     className="bg-baby-blue px-10 py-4 rounded-2xl m-5
                         hover:bg-azure transition-all font-bold text-xl text-white 

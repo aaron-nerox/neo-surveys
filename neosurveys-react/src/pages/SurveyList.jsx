@@ -3,16 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import SurveyCard from "../components/SurveyCard";
 import {services, Get} from "../services/crud.services";
 
-const SurveyList = ()=>{
+/**
+ * Survey Browsing page
+ * @returns 
+ */
+const SurveyList = ()=> {
+
+    //survey list as a state
     const [surveyList, setSurveyList] = useState([]);
+
+    //navigation in order to be able to navigate on action
     let navigate = useNavigate();
 
-    useEffect(()=>{
+    //the useEffect responsible for getting the list of available surveys
+    useEffect(() => {
         Get(services.LIST_SURVEYS)
         .then((result)=>{
             setSurveyList(result.data);
         });
     },[]);
+
 
     return (
         <div className="min-h-screen grid content-center justify-items-center">
@@ -28,6 +38,7 @@ const SurveyList = ()=>{
                             name={survey.name} 
                             key={survey.id} 
                             onClick={()=>{
+                                //navigating to survey page with a specified survey id
                                 navigate(`/survey/${survey.id}`)
                                 }   
                             }

@@ -4,15 +4,31 @@ import {services, Get, Post} from "../services/crud.services";
 import QuestionCard from "../components/QuestionCard";
 import ResultModal from "../components/ResultModal";
 
+/**
+ * Survey taking page
+ * @returns 
+ */
 const Survey = ()=>{
 
+    //useParams to capture the navigation parameters (idSurvey)
     let urlParams = useParams();
+
+    //survey object as a state
     const [survey, setSurvey] = useState({});
+
+    //survey answer object as a state
     const [surveyAnswer,setSurveyAnswer] = useState({});
+
+    //a state to controll when to show the "show result" button
     const [isResultAvailable, setIsResultAvailable] = useState(false);
+
+    //a state to controll when to show the results modal
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    //the results array as a state
     const [results, setResults] = useState([])
 
+    //the useEffect responsible for getting the survey by id
     useEffect(()=>{
         Get(services.LIST_SURVEYS, urlParams.idSurvey)
         .then((result)=>{
@@ -25,6 +41,10 @@ const Survey = ()=>{
         });
     },[urlParams.idSurvey]);
 
+    /**
+     * a function to verify if all the questions on the survey are answered or not
+     * if all answered we show the "show result" button
+     */
     function checkResultAvailable(){
         let isAllResults = true;
         surveyAnswer.answers.forEach(answer => {
@@ -38,6 +58,9 @@ const Survey = ()=>{
         }
     }
 
+    /**
+     * function to submit the survey answers and get the result
+     */
     function createResult(){
 
         Post(services.RESULT_SURVEY, surveyAnswer, surveyAnswer.idSurvey)
@@ -49,10 +72,16 @@ const Survey = ()=>{
         });
     }
 
+    /**
+     * open the result modal
+     */
     function openModal(){
         setIsModalOpen(true);
     }
 
+    /**
+     * close the result modal
+     */
     function closeModal(){
         setIsModalOpen(false);
     }

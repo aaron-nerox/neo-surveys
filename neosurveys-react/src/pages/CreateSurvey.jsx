@@ -3,32 +3,51 @@ import {services, Post} from "../services/crud.services";
 import logo from "../assets/icons/main_logo.png"
 import StatementInput from "../components/StatementInput";
 
-
+/**
+ * survey creation page
+ * @returns 
+ */
 const CreateSurvey = ()=>{
+
+    //survey questions as an array state
     const [surveyQuestions, setSurveyQuestions] = useState([]);
+
+    //survey title as a state
     const [surveyTitle, setSurveyTitle] = useState("");
 
+    /**
+     * function responsible for adding a an empty question to the ui
+     */
     function createEmptyQuestion(){
         surveyQuestions.push({"statement" : ""})
         setSurveyQuestions([...surveyQuestions]);
     }
 
+    /**
+     * function responsible to update a question
+     * @param {String} newQuestion the new input value for question
+     * @param {Int} index the number of the question to update
+     */
     function updateQuestion(newQuestion, index){
         surveyQuestions[index].statement = newQuestion
         setSurveyQuestions(surveyQuestions);
-        console.log(surveyQuestions);
     }
 
+    /**
+     * function creates a survey and cleans the input
+     */
     function createSurvey(){
+
+        //the survey object
         let data = {
             "name": surveyTitle,
             "questions": surveyQuestions
         }
 
+        //the post method to create a survey
         Post(services.CREATE_SURVEY, data)
         .then(result => {
-            //todo: add a modal saying this is cool
-            console.log(result)
+            //after submition is completed we clean the input
             setSurveyTitle("");
             setSurveyQuestions([]);
         })
