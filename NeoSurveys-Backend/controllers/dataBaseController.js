@@ -17,6 +17,7 @@ const answersData = "./data/surveyAnswers.json"
  */
 module.exports.checkDB = ()=>{
     let emptyArr = [];
+
     fs.access(surveysData, (err)=>{
         if(err) {
             fs.appendFile(surveysData, JSON.stringify(emptyArr)
@@ -44,10 +45,9 @@ module.exports.appendDB = async (key, data)=>{
         let fsData = await mz.readFile(path);
         let dbData = JSON.parse(fsData);
         data.id = dbData.length + 1;
+        dbData.push(data)
 
-        dbData.push(data);
-        strData = JSON.stringify(dbData);
-
+        let strData = JSON.stringify(dbData);
         fs.writeFile(path, strData, (err, result)=>{});
         return data;
     }catch(err){
@@ -63,12 +63,9 @@ module.exports.appendDB = async (key, data)=>{
 module.exports.readDB = async (key) =>{
     let path = getPath(key);
 
-    try{
-        let data = await mz.readFile(path);
-        return JSON.parse(data);
-    }catch(err){
-        console.log(err);
-    }
+    const data = await mz.readFile(path);
+    let strData = JSON.parse(data)
+    return strData;
 }
 
 

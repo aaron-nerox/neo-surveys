@@ -6,7 +6,7 @@ module.exports.validateSurvey = (input)=>{
         name: Joi.string().min(5).required(),
         questions: Joi.array().items(Joi.object({
             statement: Joi.string().required(),
-        })).required().min(3)
+        })).required().min(1)
     });
 
     return schema.validate(input);
@@ -19,7 +19,7 @@ module.exports.validateAnswer = (input)=>{
         answers: Joi.array().items(Joi.object({
             statement: Joi.string().required(),
             answer: Joi.boolean().required()
-        })).required().min(3)
+        })).required().min(1)
     });
 
     return schema.validate(input);

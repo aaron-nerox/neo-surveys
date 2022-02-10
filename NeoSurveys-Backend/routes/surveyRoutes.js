@@ -40,18 +40,26 @@ router.post('/result/:id', async (req, res)=>{
                         .send("Your answer does not seem to have an existing valid survey");
 
     const {error, value} = validateAnswer(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error){
+        console.log(error.details[0].message);
+        return res.status(400).send(error.details[0].message);
+    } 
 
-    if(idSurvey != value.idSurvey) return res.status(400)
+    if(idSurvey != value.idSurvey){
+        return res.status(400)
                         .send("Your answer does not seem to have an existing valid survey");
+    } 
 
-    let data = await appendDB("KEY_SURVEY_ANSWER", value);
+    appendDB("KEY_SURVEY_ANSWER", value)
+        .then(async (resValue)=>{
+            let surveyResponses = await readDB("KEY_SURVEY_ANSWER");
 
-    let surveyResponses = await readDB("KEY_SURVEY_ANSWER");
-    let result = surveyResponses?.filter(surveyResponse => 
-        surveyResponse.idSurvey === idSurvey);
+            let result = surveyResponses?.filter(surveyResponse => 
+                surveyResponse.idSurvey === idSurvey);
 
-    res.send(result);
+            return res.send(result);
+        });
+
 });
 
 /**
@@ -60,7 +68,7 @@ router.post('/result/:id', async (req, res)=>{
  */
 router.post('/create', async (req, res)=>{
     const {error, value} = validateSurvey(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) { return res.status(400).send(error.details[0].message); }
     
     let newSurvey = await appendDB("KEY_SURVEY",value);
     res.send(newSurvey);
