@@ -16,11 +16,12 @@ const SurveyList = ()=>{
 
     return (
         <div className="min-h-screen grid content-center justify-items-center">
-            <p className="m-4 mt-6 text-2xl font-bold">
+            <p className="m-4 mt-6 text-2xl font-bold text-center">
                 Browse surveys and take some of them
             </p>
 
-            <div className="w-4/5 my-5 mx-auto grid grid-cols-2">
+            <div className="sm:w-4/5 w-[90%] sm:my-5 my-3 
+                    mx-auto grid sm:grid-cols-2 grid-cols-1">
                 {
                     surveyList?.map( survey => (
                         <SurveyCard 

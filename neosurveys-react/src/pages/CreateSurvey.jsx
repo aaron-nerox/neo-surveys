@@ -87,7 +87,7 @@ const CreateSurvey = ()=>{
                     />
                 </div>
 
-                <img src={logo} alt="add" className="ms:max-w-[10%] max-w-[20%]"/>
+                <img src={logo} alt="add" className="sm:max-w-[10%] max-w-[20%]"/>
 
             </div>
 
