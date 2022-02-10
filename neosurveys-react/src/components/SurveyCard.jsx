@@ -1,6 +1,11 @@
 import logo from "../assets/icons/main_logo.png";
 
 
+/**
+ * This is the card that show a survey
+ * @param {*} props: onClick action and the name of the survey 
+ * @returns 
+ */
 const SurveyCard = (props)=>{
     return(
         <div className="m-3 p-2 bg-sky-50 hover:bg-azure-100 inline-flex flex-row 

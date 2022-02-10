@@ -1,5 +1,11 @@
 import Modal from 'react-modal';
 
+
+/**
+ * This modal shows the result list of the survey taken by a user
+ * @param {*} props: results are the list of results of the same taken survey
+ * @returns 
+ */
 const ResultModal = (props)=>{
 
     return (

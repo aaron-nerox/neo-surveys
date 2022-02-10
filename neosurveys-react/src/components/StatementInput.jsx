@@ -1,4 +1,10 @@
 
+
+/**
+ * 
+ * @param {*} props onChange for input capture and statement is the value input
+ * @returns 
+ */
 const StatementInput = (props)=>{
 
     return(
