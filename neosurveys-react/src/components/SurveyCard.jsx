@@ -1,4 +1,4 @@
-import logo from "../assets/icons/main_logo.png";
+import logo from "../assets/icons/survey_icon.png";
 
 
 /**

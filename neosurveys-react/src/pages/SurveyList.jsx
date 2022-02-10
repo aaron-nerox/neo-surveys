@@ -25,7 +25,8 @@ const SurveyList = ()=> {
 
 
     return (
-        <div className="min-h-screen grid content-center justify-items-center">
+        <div className="min-h-screen grid content-center justify-items-center 
+        bg-gradient-to-r from-baby-blue/10 to-azure/10">
             <p className="m-4 mt-6 text-2xl font-bold text-center">
                 Browse surveys and take some of them
             </p>

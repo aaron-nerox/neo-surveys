@@ -51,8 +51,8 @@ const ResultModal = (props)=>{
             <button
                 onClick={props.onRequestClose}
 
-                className="sm:w-1/3 w-4/5 sm:m-4 max-h-16 mx-auto bg-baby-blue px-10 py-4 rounded-2xl m-3
-                hover:bg-azure transition-all font-bold text-xl text-white 
+                className="sm:w-1/3 w-4/5 sm:m-4 max-h-16 m-3 sm:mx-auto mx-auto bg-baby-blue px-10 py-4 rounded-2xl 
+                hover:bg-azure transition-all font-bold text-xl text-white  text-center
                 shadow-lg shadow-baby-blue/50 hover:shadow-azure/40">
 
                 Validate

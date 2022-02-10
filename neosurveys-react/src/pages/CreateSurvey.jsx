@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {services, Post} from "../services/crud.services";
-import logo from "../assets/icons/main_logo.png"
+import logo from "../assets/icons/add_icon.png"
 import StatementInput from "../components/StatementInput";
+import SuccessCard from "../components/SuccessCard";
 
 /**
  * survey creation page
@@ -14,6 +15,9 @@ const CreateSurvey = ()=>{
 
     //survey title as a state
     const [surveyTitle, setSurveyTitle] = useState("");
+
+    //sucess modal as a state
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     /**
      * function responsible for adding a an empty question to the ui
@@ -50,11 +54,19 @@ const CreateSurvey = ()=>{
             //after submition is completed we clean the input
             setSurveyTitle("");
             setSurveyQuestions([]);
+
+            //open the modal
+            setIsModalOpen(true);
         })
     }
 
     return (
-        <div className="min-h-screen grid content-center justify-items-center">
+        <div className="min-h-screen grid content-center justify-items-center
+            bg-gradient-to-r from-baby-blue/10 to-azure/10">
+            <SuccessCard 
+                isOpen={isModalOpen}
+                onRequestClose={()=> setIsModalOpen(false)}
+            />
             <p className="m-4 mt-6 text-2xl font-bold">
                 Create your own survey
             </p>

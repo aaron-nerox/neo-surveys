@@ -87,7 +87,8 @@ const Survey = ()=>{
     }
 
     return (
-        <div className="min-h-screen grid content-center justify-items-center">
+        <div className="min-h-screen grid content-center justify-items-center
+        bg-gradient-to-r from-baby-blue/10 to-azure/10">
             <ResultModal 
                 results={results}
                 isOpen={isModalOpen}

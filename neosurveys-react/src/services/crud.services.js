@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ROOT_URL = "http://d364-105-235-128-64.ngrok.io/api/surveys";
+const ROOT_URL = "http://localhost:8000/api/surveys";
 
 /**
  * @LIST_SURVEYS : Endpoint for getting the survey list or a survey
