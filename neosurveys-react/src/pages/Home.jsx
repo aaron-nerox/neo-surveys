@@ -11,7 +11,7 @@ const Home = ()=>{
         <div className="w-full h-screen bg-gradient-to-r from-baby-blue/10 
         to-azure/10 grid content-center justify-items-center">
 
-            <img className="w-1/6 m-3" src={AppLogo} alt="main_logo" />
+            <img className="sm:w-1/6 w-1/2 m-3" src={AppLogo} alt="main_logo" />
 
             <p className="w-4/5 m-3 font-bold text-3xl text-center">
                 Neo Surveys
