@@ -28,6 +28,7 @@ const CreateSurvey = ()=>{
         Post(services.CREATE_SURVEY, data)
         .then(result => {
             //todo: add a modal saying this is cool
+            console.log(result)
             setSurveyTitle("");
             setSurveyQuestions([]);
         })
