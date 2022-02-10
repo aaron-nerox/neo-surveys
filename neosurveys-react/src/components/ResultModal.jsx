@@ -7,11 +7,11 @@ const ResultModal = (props)=>{
             isOpen={props.isOpen} 
             onRequestClose={props.onRequestClose}
             contentLabel="Survey results"
-            className="w-3/4 mx-auto p-4 absolute inset-12 bg-white rounded-2xl 
+            className="sm:w-3/4 w-[95%] mx-auto p-4 absolute sm:inset-12 inset-2 bg-white rounded-2xl 
             grid overflow-auto"
-            overlayClassName="fixed inset-0 bg-black/60 backdrop-blur-sm">
+            overlayClassName="fixed inset-0 bg-black/60 sm:backdrop-blur-sm">
 
-            <p className="w-full m-2 font-bold text-3xl text-center">
+            <p className="w-full m-2 mx-auto font-bold sm:text-3xl text-xl text-center">
                 See how others answered on this survey
             </p>
 
@@ -26,11 +26,11 @@ const ResultModal = (props)=>{
 
                         result.answers.map((item, key)=>(
                             <div key={key} className="inline-flex flex-row items-center">
-                                <p className="mx-2 mt-1 font-semibold text-xl">
+                                <p className="sm:mx-2 mx-1 mt-1 font-semibold sm:text-xl text-md text-left">
                                     {item.statement}
                                 </p>
-                                <p className="px-8 pt-1 pb-2 rounded-2xl m-5 
-                                transition-all font-bold text-xl text-white shadow-lg 
+                                <p className="sm:px-8 px-4 pt-1 pb-2 sm:rounded-2xl rounded-xl sm:m-5 m-3 
+                                transition-all font-bold sm:text-xl text-md text-white shadow-lg
                                 shadow-baby-blue/50 hover:shadow-azure/40 bg-baby-blue hover:bg-azure">
                                     {`${item.answer? "Yes" : "No" }`}
                                 </p>
@@ -45,7 +45,7 @@ const ResultModal = (props)=>{
             <button
                 onClick={props.onRequestClose}
 
-                className="w-1/3 max-h-16 mx-auto bg-baby-blue px-10 py-4 rounded-2xl m-5 mb-10
+                className="sm:w-1/3 w-4/5 sm:m-4 max-h-16 mx-auto bg-baby-blue px-10 py-4 rounded-2xl m-3
                 hover:bg-azure transition-all font-bold text-xl text-white 
                 shadow-lg shadow-baby-blue/50 hover:shadow-azure/40">
 

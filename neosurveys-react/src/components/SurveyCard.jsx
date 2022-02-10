@@ -4,7 +4,7 @@ import logo from "../assets/icons/main_logo.png";
 const SurveyCard = (props)=>{
     return(
         <div className="m-3 p-2 bg-sky-50 hover:bg-azure-100 inline-flex flex-row 
-            items-start rounded-3xl border-2 border-baby-blue/30 hover:border-azure/30
+            items-center rounded-3xl border-2 border-baby-blue/30 hover:border-azure/30
             transition-all"
             onClick={props.onClick}>
 
