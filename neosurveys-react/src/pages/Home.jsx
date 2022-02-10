@@ -18,7 +18,7 @@ const Home = ()=>{
                 Start enjoying your time with this app now
             </p>
 
-            <div className='inline-flex flex-row items-center'>
+            <div className='inline-flex flex-col sm:flex-row items-center'>
                 <Link 
                     className="bg-baby-blue px-10 py-4 rounded-2xl m-5
                         hover:bg-azure transition-all font-bold text-xl text-white 
