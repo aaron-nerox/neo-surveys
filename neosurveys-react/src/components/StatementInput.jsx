@@ -9,7 +9,7 @@ const StatementInput = (props)=>{
                 What is your question?
             </p>
             <input type="text" 
-                    className="m-4 p-4 h-13 w-3/5 rounded-xl outline-none"
+                    className="sm:m-4 my-4 p-4 h-13 sm:w-3/5 w-full rounded-xl outline-none"
                     name="question-input"
                     placeholder="Your question"
                     value={props.Statement}

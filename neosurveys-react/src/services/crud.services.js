@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ROOT_URL = "http://localhost:8000/api/surveys";
+const ROOT_URL = "http://d364-105-235-128-64.ngrok.io/api/surveys";
 
 export const services = {
     LIST_SURVEYS: `${ROOT_URL}`,
