@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
 const {checkDB} = require('./controllers/dataBaseController')
-
+/*const cors1 = require('cors');
 const app = express();
 const port = process.env.port || 8000;
 
